@@ -32,4 +32,11 @@ router.get(
   UserControllers.getAllUser
 );
 
+//! super_admin----------------------------------------------------------------
+router.patch(
+  '/change-role/:id',
+  auth(ENUM_USER_ROLE.SUPER_ADMIN),
+  UserControllers.changeRole
+);
+
 export const UserRoutes = router;
