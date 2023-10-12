@@ -27,8 +27,9 @@ const updateUser: RequestHandler = catchAsync(
 const deleteUser: RequestHandler = catchAsync(
   async (req: Request, res: Response) => {
     const id = req.params.id;
+    const user = req.user;
 
-    const result = await UserServices.deleteUser(id);
+    const result = await UserServices.deleteUser(id, user);
 
     sendResponse<IUserProfile>(res, {
       statusCode: httpStatus.OK,

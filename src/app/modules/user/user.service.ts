@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiError';
 import { IUserProfile } from './user.interface';
@@ -23,7 +24,12 @@ const updateUser = async (
   return updatedUser;
 };
 
-const deleteUser = async (id: string): Promise<IUserProfile | null> => {
+const deleteUser = async (id: string, user: any): Promise<IUserProfile | null> => {
+
+  if(user.role === 'user' && user.id !== id) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'You cannot delete this user');
+  }
+  
   const result = await User.findByIdAndDelete(id);
 
   return result;
