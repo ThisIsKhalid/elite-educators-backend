@@ -27,7 +27,7 @@ const deleteUser = async (id: string): Promise<IUserProfile | null> => {
   const result = await User.findByIdAndDelete(id);
 
   return result;
-}
+};
 
 const getUserProfile = async (id: string): Promise<IUserProfile | null> => {
   const result = await User.findById(id);
@@ -45,9 +45,30 @@ const getAllUser = async (): Promise<IUserProfile[]> => {
   return result;
 };
 
+//! super_admin----------------------------------------------------------------
+// change role user to admin, admin to user
+const changeRole = async (id: string) => {
+  const isExist = await User.findById(id);
+
+  if (!isExist) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  }
+
+  const updatedUser = await User.findByIdAndUpdate(
+    id,
+    { role: isExist.role === 'admin' ? 'user' : 'admin' },
+    {
+      new: true,
+    }
+  );
+
+  return updatedUser;
+};
+
 export const UserServices = {
   updateUser,
   getUserProfile,
   getAllUser,
-  deleteUser
+  deleteUser,
+  changeRole
 };
