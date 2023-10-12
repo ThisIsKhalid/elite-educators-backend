@@ -21,7 +21,7 @@ const userSchema = new Schema<IUserProfile>(
     },
     role: {
       type: String,
-      required: true,
+      default: 'user',
       enum: ['user', 'admin','super_admin'],
     },
     profileImgUrl: {

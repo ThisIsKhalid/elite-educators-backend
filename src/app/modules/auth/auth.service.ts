@@ -8,10 +8,29 @@ import { IUserProfile } from '../user/user.interface';
 import { User } from '../user/user.model';
 import { ILoginUser, ILoginUserResponse } from './auth.interface';
 
-const createUer = async (payload: IUserProfile): Promise<IUserProfile> => {
+const createUer = async (
+  payload: IUserProfile
+): Promise<ILoginUserResponse> => {
   const user = await User.create(payload);
 
-  return user;
+  const { id, email, role } = user;
+
+  const accessToken = jwtHelpers.createToken(
+    { email, role, id },
+    config.jwt.secret as Secret,
+    config.jwt.expires_in as string
+  );
+
+  const refreshToken = jwtHelpers.createToken(
+    { email, role, id },
+    config.jwt.refresh_secret as Secret,
+    config.jwt.refresh_expires_in as string
+  );
+
+  return {
+    accessToken,
+    refreshToken,
+  };
 };
 
 const loginUser = async (userData: ILoginUser): Promise<ILoginUserResponse> => {
