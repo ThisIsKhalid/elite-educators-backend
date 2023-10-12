@@ -23,6 +23,31 @@ const updateUser = async (
   return updatedUser;
 };
 
+const deleteUser = async (id: string): Promise<IUserProfile | null> => {
+  const result = await User.findByIdAndDelete(id);
+
+  return result;
+}
+
+const getUserProfile = async (id: string): Promise<IUserProfile | null> => {
+  const result = await User.findById(id);
+
+  if (!result) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  }
+
+  return result;
+};
+
+const getAllUser = async (): Promise<IUserProfile[]> => {
+  const result = await User.find();
+
+  return result;
+};
+
 export const UserServices = {
   updateUser,
+  getUserProfile,
+  getAllUser,
+  deleteUser
 };

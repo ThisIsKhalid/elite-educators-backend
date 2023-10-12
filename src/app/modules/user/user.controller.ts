@@ -24,7 +24,52 @@ const updateUser: RequestHandler = catchAsync(
   }
 );
 
+const deleteUser: RequestHandler = catchAsync(
+  async (req: Request, res: Response) => {
+    const id = req.params.id;
+
+    const result = await UserServices.deleteUser(id);
+
+    sendResponse<IUserProfile>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'User deleted successfully!',
+      data: result,
+    });
+  }
+);
+
+const getUserProfile: RequestHandler = catchAsync(
+  async (req: Request, res: Response) => {
+    const id = req.params.id;
+
+    const result = await UserServices.getUserProfile(id);
+
+    sendResponse<IUserProfile>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'User fetched successfully!',
+      data: result,
+    });
+  }
+);
+
+const getAllUser: RequestHandler = catchAsync(
+  async (req: Request, res: Response) => {
+    const result = await UserServices.getAllUser();
+
+    sendResponse<IUserProfile[]>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Users fetched successfully!',
+      data: result,
+    });
+  }
+);
 
 export const UserControllers = {
   updateUser,
+  deleteUser,
+  getUserProfile,
+  getAllUser,
 };
