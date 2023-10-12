@@ -67,9 +67,26 @@ const getAllUser: RequestHandler = catchAsync(
   }
 );
 
+//! super_admin----------------------------------------------------------------
+const changeRole: RequestHandler = catchAsync(
+  async (req: Request, res: Response) => {
+    const id = req.params.id;
+
+    const result = await UserServices.changeRole(id);
+
+    sendResponse<IUserProfile>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Role changed successfully!',
+      data: result,
+    });
+  }
+);
+
 export const UserControllers = {
   updateUser,
   deleteUser,
   getUserProfile,
   getAllUser,
+  changeRole,
 };
