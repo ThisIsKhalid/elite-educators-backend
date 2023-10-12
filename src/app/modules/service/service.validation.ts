@@ -48,6 +48,22 @@ const addServiceSchema = z.object({
   }),
 });
 
+const updateServiceSchema = z.object({
+  body: z.object({
+    instructorId: z.string().optional(),
+    subject: z.string().optional(),
+    description: z.string().optional(),
+    price: z.number().min(0).optional(),
+    class: z.enum(['junior', 'secondary', 'higher-secondary']).optional(),
+    startTime: z.string().optional(),
+    endTime: z.string().optional(),
+    lessonTime: z.string().optional(),
+    rating: z.number().optional(),
+    weeklySchedules: weeklyScheduleSchema.optional(),
+  }),
+});
+
 export const ServiceValidations = {
   addServiceSchema,
+  updateServiceSchema,
 };

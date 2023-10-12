@@ -14,4 +14,11 @@ router.post(
   ServiceControllers.createService
 );
 
+router.patch(
+  '/update-service/:id',
+  validateRequest(ServiceValidations.updateServiceSchema),
+  auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
+  ServiceControllers.updateService
+);
+
 export const ServiceRoutes = router;
