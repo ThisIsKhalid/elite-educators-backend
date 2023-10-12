@@ -20,7 +20,23 @@ const createService: RequestHandler = catchAsync(
   }
 );
 
+const updateService: RequestHandler = catchAsync(
+  async (req: Request, res: Response) => {
+    const id = req.params.id;
+    const data = req.body;
+
+    const result = await ServiceServices.updateService(id, data);
+
+    sendResponse<IService>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Service updated successfully!',
+      data: result,
+    });
+  }
+);
 
 export const ServiceControllers = {
   createService,
+  updateService
 };
