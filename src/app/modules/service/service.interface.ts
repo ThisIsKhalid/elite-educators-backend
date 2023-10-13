@@ -6,11 +6,12 @@ export type IService = {
   subject: string;
   description: string;
   price: number;
-  class: 'junior' | 'secondary' | 'higher-secondary';
+  category: 'junior' | 'secondary' | 'higher-secondary';
   startTime: Date;
   endTime: Date;
   lessonTime: string;
   rating?: number;
+  location: string;
   weeklySchedules: IWeeklySchedule;
 };
 
@@ -28,3 +29,11 @@ export type IWeeklySchedule = {
   enrolled: number;
   isAvailable: boolean;
 };
+
+export type IServiceFilters = {
+  searchTerm?: string;
+  rating?: number;
+  minPrice?: number;
+  maxPrice?: number;
+  isAvailable?: boolean;
+}

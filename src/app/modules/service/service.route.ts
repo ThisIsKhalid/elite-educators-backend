@@ -21,4 +21,14 @@ router.patch(
   ServiceControllers.updateService
 );
 
+router.get('/:id', ServiceControllers.getSingleService)
+
+router.delete(
+  '/:id',
+  auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
+  ServiceControllers.deleteService
+);
+
+router.get('/', ServiceControllers.getAllService);
+
 export const ServiceRoutes = router;
