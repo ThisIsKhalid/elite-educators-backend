@@ -49,7 +49,7 @@ const serviceSchema = new Schema<IService>(
       type: Number,
       required: true,
     },
-    class: {
+    category: {
       type: String,
       enum: ['junior', 'secondary', 'higher-secondary'],
       required: true,
@@ -69,6 +69,10 @@ const serviceSchema = new Schema<IService>(
     rating: {
       type: Number,
       default: 0,
+    },
+    location: {
+      type: String,
+      required: true,
     },
     weeklySchedules: {
       type: weeklyScheduleSchema,

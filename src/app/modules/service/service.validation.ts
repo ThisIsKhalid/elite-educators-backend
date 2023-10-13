@@ -33,7 +33,7 @@ const addServiceSchema = z.object({
         required_error: 'Price is required',
       })
       .min(0),
-    class: z.enum(['junior', 'secondary', 'higher-secondary']),
+    category: z.enum(['junior', 'secondary', 'higher-secondary']),
     startTime: z.string({
       required_error: 'Start time is required',
     }),
@@ -44,6 +44,9 @@ const addServiceSchema = z.object({
       required_error: 'Lesson time is required',
     }),
     rating: z.number().optional(),
+    location: z.string({
+      required_error: 'Location is required',
+    }),
     weeklySchedules: weeklyScheduleSchema,
   }),
 });
@@ -54,11 +57,12 @@ const updateServiceSchema = z.object({
     subject: z.string().optional(),
     description: z.string().optional(),
     price: z.number().min(0).optional(),
-    class: z.enum(['junior', 'secondary', 'higher-secondary']).optional(),
+    category: z.enum(['junior', 'secondary', 'higher-secondary']).optional(),
     startTime: z.string().optional(),
     endTime: z.string().optional(),
     lessonTime: z.string().optional(),
     rating: z.number().optional(),
+    location: z.string().optional(),
     weeklySchedules: weeklyScheduleSchema.optional(),
   }),
 });
