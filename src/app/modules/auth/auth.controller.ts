@@ -9,6 +9,8 @@ import { AuthServices } from './auth.service';
 const createUser: RequestHandler = catchAsync(
   async (req: Request, res: Response) => {
     const userData = req.body;
+    // console.log(userData);
+
     const result = await AuthServices.createUer(userData);
 
     const { refreshToken, ...others } = result;

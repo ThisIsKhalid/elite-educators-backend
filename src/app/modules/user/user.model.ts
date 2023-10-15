@@ -26,7 +26,6 @@ const userSchema = new Schema<IUserProfile>(
     },
     profileImgUrl: {
       type: String,
-      required: true,
     },
     phonenumber: {
       type: String,
