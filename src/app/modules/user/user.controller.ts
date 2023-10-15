@@ -9,6 +9,7 @@ import { UserServices } from './user.service';
 const updateUser: RequestHandler = catchAsync(
   async (req: Request, res: Response) => {
     const userData = req.body;
+    
 
     const user = req.user;
     const { id } = user!;

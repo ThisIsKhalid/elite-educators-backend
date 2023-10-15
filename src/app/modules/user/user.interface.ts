@@ -6,6 +6,6 @@ export type IUserProfile = {
   password: string;
   role?: 'user' | 'admin' | 'super_admin';
   
-  profileImgUrl: string;
+  profileImgUrl?: string;
   phonenumber: string;
 };

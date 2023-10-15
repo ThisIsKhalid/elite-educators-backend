@@ -13,9 +13,7 @@ const createUserZodSchema = z.object({
     password: z.string({
       required_error: 'Password is required',
     }),
-    profileImgUrl: z.string({
-      required_error: 'Profile image url is required.',
-    }),
+    profileImgUrl: z.string().optional(),
     phonenumber: z.string({
       required_error: 'Phone number is required.',
     }),

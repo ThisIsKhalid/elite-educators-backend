@@ -28,6 +28,10 @@ const weeklyScheduleSchema = new Schema<IWeeklySchedule>({
     type: Boolean,
     default: true,
   },
+  classtime: {
+    type: String,
+    required: true,
+  },
 });
 
 const serviceSchema = new Schema<IService>(
@@ -45,11 +49,15 @@ const serviceSchema = new Schema<IService>(
       type: String,
       required: true,
     },
+    image: {
+      type: String,
+      required: true,
+    },
     price: {
       type: Number,
       required: true,
     },
-    category: {
+    level: {
       type: String,
       enum: ['junior', 'secondary', 'higher-secondary'],
       required: true,
@@ -62,7 +70,7 @@ const serviceSchema = new Schema<IService>(
       type: Date,
       required: true,
     },
-    lessonTime: {
+    duration: {
       type: String,
       required: true,
     },

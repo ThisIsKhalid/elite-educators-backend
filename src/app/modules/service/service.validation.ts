@@ -15,6 +15,7 @@ const weeklyScheduleSchema = z.object({
   seats: z.number().min(0),
   enrolled: z.number().min(0),
   isAvailable: z.boolean(),
+  classtime: z.string(),
 });
 
 const addServiceSchema = z.object({
@@ -28,19 +29,22 @@ const addServiceSchema = z.object({
     description: z.string({
       required_error: 'Description is required',
     }),
+    image: z.string({
+      required_error: 'Image is required',
+    }),
     price: z
       .number({
         required_error: 'Price is required',
       })
       .min(0),
-    category: z.enum(['junior', 'secondary', 'higher-secondary']),
+    level: z.enum(['junior', 'secondary', 'higher-secondary']),
     startTime: z.string({
       required_error: 'Start time is required',
     }),
     endTime: z.string({
       required_error: 'End time is required',
     }),
-    lessonTime: z.string({
+    duratiorn: z.string({
       required_error: 'Lesson time is required',
     }),
     rating: z.number().optional(),
@@ -57,10 +61,10 @@ const updateServiceSchema = z.object({
     subject: z.string().optional(),
     description: z.string().optional(),
     price: z.number().min(0).optional(),
-    category: z.enum(['junior', 'secondary', 'higher-secondary']).optional(),
+    level: z.enum(['junior', 'secondary', 'higher-secondary']).optional(),
     startTime: z.string().optional(),
     endTime: z.string().optional(),
-    lessonTime: z.string().optional(),
+    duration: z.string().optional(),
     rating: z.number().optional(),
     location: z.string().optional(),
     weeklySchedules: weeklyScheduleSchema.optional(),

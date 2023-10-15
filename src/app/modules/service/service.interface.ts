@@ -5,11 +5,12 @@ export type IService = {
   instructorId: Types.ObjectId | IUserProfile;
   subject: string;
   description: string;
+  image: string;
   price: number;
-  category: 'junior' | 'secondary' | 'higher-secondary';
+  level: 'junior' | 'secondary' | 'higher-secondary';
   startTime: Date;
   endTime: Date;
-  lessonTime: string;
+  duration: string;
   rating?: number;
   location: string;
   weeklySchedules: IWeeklySchedule;
@@ -28,6 +29,7 @@ export type IWeeklySchedule = {
   seats: number;
   enrolled: number;
   isAvailable: boolean;
+  classtime: string;
 };
 
 export type IServiceFilters = {
