@@ -8,7 +8,7 @@ export const serviceFilterableFields = [
 
 export const serviceSearchableFields = [
   'subject',
-  'category',
+  'level',
   'location'
 ]
 

@@ -1,36 +1,13 @@
 import { Schema, model } from 'mongoose';
-import { IService, IWeeklySchedule } from './service.interface';
-import { monthsArray } from './service.constant';
+import { IPrice, IService } from './service.interface';
 
-const weeklyScheduleSchema = new Schema<IWeeklySchedule>({
-  days: [
-    {
-      type: String,
-      enum: [
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-        'Sunday',
-      ],
-    },
-  ],
-  seats: {
+const PriceSchema = new Schema<IPrice>({
+  amountPerWeek: {
     type: Number,
-    default: 0,
+    required: true,
   },
-  enrolled: {
+  daysPerWeek: {
     type: Number,
-    default: 0,
-  },
-  isAvailable: {
-    type: Boolean,
-    default: true,
-  },
-  classtime: {
-    type: String,
     required: true,
   },
 });
@@ -52,29 +29,11 @@ const serviceSchema = new Schema<IService>(
     },
     image: {
       type: String,
-      required: true,
     },
-    price: {
-      type: Number,
-      required: true,
-    },
+    price: [PriceSchema],
     level: {
       type: String,
       enum: ['junior', 'secondary', 'higher-secondary'],
-      required: true,
-    },
-    startTime: {
-      type: String,
-      enum: monthsArray,
-      required: true,
-    },
-    endTime: {
-      type: String,
-      enum: monthsArray,
-      required: true,
-    },
-    duration: {
-      type: String,
       required: true,
     },
     rating: {
@@ -85,8 +44,20 @@ const serviceSchema = new Schema<IService>(
       type: String,
       required: true,
     },
-    weeklySchedules: {
-      type: weeklyScheduleSchema,
+    seats: {
+      type: Number,
+      required: true,
+    },
+    enrolled: {
+      type: Number,
+      default: 0,
+    },
+    isAvailable: {
+      type: Boolean,
+      default: true,
+    },
+    classtime: {
+      type: String,
       required: true,
     },
   },
