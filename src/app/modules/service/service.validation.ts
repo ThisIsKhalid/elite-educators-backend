@@ -44,8 +44,8 @@ const addServiceSchema = z.object({
     endTime: z.string({
       required_error: 'End time is required',
     }),
-    duratiorn: z.string({
-      required_error: 'Lesson time is required',
+    duration: z.string({
+      required_error: 'Duration is required',
     }),
     rating: z.number().optional(),
     location: z.string({
