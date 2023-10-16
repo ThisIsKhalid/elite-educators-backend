@@ -1,6 +1,20 @@
 import { Types } from 'mongoose';
 import { IUserProfile } from '../user/user.interface';
 
+type Months =
+  | 'January'
+  | 'February'
+  | 'March'
+  | 'April'
+  | 'May'
+  | 'June'
+  | 'July'
+  | 'August'
+  | 'September'
+  | 'October'
+  | 'November'
+  | 'December';
+
 export type IService = {
   instructorId: Types.ObjectId | IUserProfile;
   subject: string;
@@ -8,8 +22,8 @@ export type IService = {
   image: string;
   price: number;
   level: 'junior' | 'secondary' | 'higher-secondary';
-  startTime: Date;
-  endTime: Date;
+  startTime: Months;
+  endTime: Months;
   duration: string;
   rating?: number;
   location: string;

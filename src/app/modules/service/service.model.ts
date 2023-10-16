@@ -1,5 +1,6 @@
 import { Schema, model } from 'mongoose';
 import { IService, IWeeklySchedule } from './service.interface';
+import { monthsArray } from './service.constant';
 
 const weeklyScheduleSchema = new Schema<IWeeklySchedule>({
   days: [
@@ -63,11 +64,13 @@ const serviceSchema = new Schema<IService>(
       required: true,
     },
     startTime: {
-      type: Date,
+      type: String,
+      enum: monthsArray,
       required: true,
     },
     endTime: {
-      type: Date,
+      type: String,
+      enum: monthsArray,
       required: true,
     },
     duration: {
