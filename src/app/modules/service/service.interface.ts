@@ -1,49 +1,29 @@
 import { Types } from 'mongoose';
 import { IUserProfile } from '../user/user.interface';
 
-type Months =
-  | 'January'
-  | 'February'
-  | 'March'
-  | 'April'
-  | 'May'
-  | 'June'
-  | 'July'
-  | 'August'
-  | 'September'
-  | 'October'
-  | 'November'
-  | 'December';
+export type IPrice = {
+  amountPerWeek: number;
+  daysPerWeek: number;
+};
 
 export type IService = {
   instructorId: Types.ObjectId | IUserProfile;
   subject: string;
   description: string;
-  image: string;
-  price: number;
+  image?: string;
+  price: IPrice[];
   level: 'junior' | 'secondary' | 'higher-secondary';
-  startTime: Months;
-  endTime: Months;
-  duration: string;
   rating?: number;
   location: string;
-  weeklySchedules: IWeeklySchedule;
-};
-
-export type IWeeklySchedule = {
-  days: (
-    | 'Monday'
-    | 'Tuesday'
-    | 'Wednesday'
-    | 'Thursday'
-    | 'Friday'
-    | 'Saturday'
-    | 'Sunday'
-  )[];
   seats: number;
   enrolled: number;
   isAvailable: boolean;
   classtime: string;
+};
+
+export type IBooking = {
+  startTime: Date;
+  endTime: Date;
 };
 
 export type IServiceFilters = {
@@ -52,4 +32,4 @@ export type IServiceFilters = {
   minPrice?: number;
   maxPrice?: number;
   isAvailable?: boolean;
-}
+};

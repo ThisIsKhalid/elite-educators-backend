@@ -58,29 +58,27 @@ const getAllService = async (
   const {
     searchTerm,
     rating: ratingData,
-    minPrice,
-    maxPrice,
     isAvailable,
     ...filtersData
   } = filters;
 
   const andConditions = [];
 
-  if (minPrice) {
-    andConditions.push({
-      price: {
-        $gte: parseFloat(minPrice.toString()),
-      },
-    });
-  }
+  // if (minPrice) {
+  //   andConditions.push({
+  //     price: {
+  //       $gte: parseFloat(minPrice.toString()),
+  //     },
+  //   });
+  // }
 
-  if (maxPrice) {
-    andConditions.push({
-      price: {
-        $lte: parseFloat(maxPrice.toString()),
-      },
-    });
-  }
+  // if (maxPrice) {
+  //   andConditions.push({
+  //     price: {
+  //       $lte: parseFloat(maxPrice.toString()),
+  //     },
+  //   });
+  // }
 
   if (ratingData) {
     const minRating = parseFloat(ratingData.toString());
@@ -112,7 +110,7 @@ const getAllService = async (
 
   if (isAvailable !== undefined) {
     andConditions.push({
-      'weeklySchedules.isAvailable': isAvailable,
+      isAvailable: isAvailable,
     });
   }
 

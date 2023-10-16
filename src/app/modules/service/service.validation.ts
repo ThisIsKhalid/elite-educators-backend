@@ -1,27 +1,14 @@
 import { z } from 'zod';
 
-const weeklyScheduleSchema = z.object({
-  days: z.array(
-    z.enum([
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-      'Sunday',
-    ])
-  ),
-  seats: z.number().min(0),
-  enrolled: z.number().min(0),
-  isAvailable: z.boolean(),
-  classtime: z.string(),
+const IPriceSchema = z.object({
+  amountPerWeek: z.number(),
+  daysPerWeek: z.number(),
 });
 
 const addServiceSchema = z.object({
   body: z.object({
     instructorId: z.string({
-      required_error: 'Instructor ID is required',
+      required_error: 'Instructor id is required',
     }),
     subject: z.string({
       required_error: 'Subject is required',
@@ -29,29 +16,21 @@ const addServiceSchema = z.object({
     description: z.string({
       required_error: 'Description is required',
     }),
-    image: z.string({
-      required_error: 'Image is required',
-    }),
-    price: z
-      .number({
-        required_error: 'Price is required',
-      })
-      .min(0),
+    image: z.string().optional(),
+    price: z.array(IPriceSchema),
     level: z.enum(['junior', 'secondary', 'higher-secondary']),
-    startTime: z.string({
-      required_error: 'Start time is required',
-    }),
-    endTime: z.string({
-      required_error: 'End time is required',
-    }),
-    duration: z.string({
-      required_error: 'Duration is required',
-    }),
     rating: z.number().optional(),
     location: z.string({
       required_error: 'Location is required',
     }),
-    weeklySchedules: weeklyScheduleSchema,
+    seats: z.number({
+      required_error: 'Seats is required',
+    }),
+    enrolled: z.number().optional().default(0),
+    isAvailable: z.boolean().optional().default(true),
+    classtime: z.string({
+      required_error: 'Classtime is required',
+    }),
   }),
 });
 
@@ -67,7 +46,6 @@ const updateServiceSchema = z.object({
     duration: z.string().optional(),
     rating: z.number().optional(),
     location: z.string().optional(),
-    weeklySchedules: weeklyScheduleSchema.optional(),
   }),
 });
 
