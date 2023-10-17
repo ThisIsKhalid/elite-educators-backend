@@ -1,16 +1,17 @@
 import { Request, RequestHandler, Response } from 'express';
 import httpStatus from 'http-status';
+import { paginationFields } from '../../../constants/pagination';
 import catchAsync from '../../../shared/catchAsync';
+import pick from '../../../shared/pick';
 import sendResponse from '../../../shared/sendResponse';
+import { serviceFilterableFields } from './service.constant';
 import { IService } from './service.interface';
 import { ServiceServices } from './service.service';
-import pick from '../../../shared/pick';
-import { serviceFilterableFields } from './service.constant';
-import { paginationFields } from '../../../constants/pagination';
 
 const createService: RequestHandler = catchAsync(
   async (req: Request, res: Response) => {
     const data = req.body;
+    // console.log(data);
 
     const result = await ServiceServices.createService(data);
 
@@ -67,13 +68,16 @@ const deleteService: RequestHandler = catchAsync(
       data: result,
     });
   }
-)
+);
 
 const getAllService = catchAsync(async (req: Request, res: Response) => {
   const filters = pick(req.query, serviceFilterableFields);
   const paginationOptions = pick(req.query, paginationFields);
 
-  const result = await ServiceServices.getAllService(filters, paginationOptions);
+  const result = await ServiceServices.getAllService(
+    filters,
+    paginationOptions
+  );
 
   sendResponse<IService[]>(res, {
     statusCode: httpStatus.OK,
@@ -89,5 +93,5 @@ export const ServiceControllers = {
   updateService,
   getSingleService,
   deleteService,
-  getAllService
+  getAllService,
 };
