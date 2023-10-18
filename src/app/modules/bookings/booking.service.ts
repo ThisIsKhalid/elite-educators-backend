@@ -1,3 +1,5 @@
+import { paginationHelpers } from '../../../helpers/paginationHelper';
+import { IPaginationOptions } from '../../../interfaces/pagination';
 import { IBooking } from './booking.interface';
 import { Booking } from './booking.model';
 
@@ -7,20 +9,56 @@ const addBooking = async (data: IBooking): Promise<IBooking> => {
   return result;
 };
 
-const getallBookingByServiceId = async (id: string): Promise<IBooking[]> => {
+const getallBookingByServiceId = async (
+  id: string,
+  paginationOptions: IPaginationOptions
+) => {
+  const { limit, page, skip } =
+    paginationHelpers.calculatePagination(paginationOptions);
+
   const result = await Booking.find({ serviceId: id })
     .populate('userId')
-    .populate('serviceId');
+    .populate('serviceId')
+    .skip(skip)
+    .limit(limit)
+    .lean();
 
-  return result;
+  const total = await Booking.countDocuments({ serviceId: id });
+
+  return {
+    meta: {
+      page,
+      limit,
+      total,
+    },
+    data: result,
+  };
 };
 
-const getAllBookingByUserId = async (id: string): Promise<IBooking[]> => {
+const getAllBookingByUserId = async (
+  id: string,
+  paginationOptions: IPaginationOptions
+) => {
+  const { limit, page, skip } =
+    paginationHelpers.calculatePagination(paginationOptions);
+
   const result = await Booking.find({ userId: id })
     .populate('userId')
-    .populate('serviceId');
+    .populate('serviceId')
+    .skip(skip)
+    .limit(limit)
+    .lean();
 
-  return result;
+  const total = await Booking.countDocuments({ userId: id });
+
+  return {
+    meta: {
+      page,
+      limit,
+      total,
+    },
+    data: result,
+  };
 };
 
 const updateBooking = async (
