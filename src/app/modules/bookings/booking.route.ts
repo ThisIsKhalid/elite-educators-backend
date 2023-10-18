@@ -11,4 +11,12 @@ router.post(
   BookingController.addBooking
 );
 
+router.get('/service/:serviceId', BookingController.getallBookingByServiceId);
+
+router.get('/user/:userId', BookingController.getAllBookingByUserId);
+
+router.delete('/:id', BookingController.deleteBooking);
+
+router.patch('/status/:id', BookingController.bookingAccepts);
+
 export const BookingRoutes = router;
