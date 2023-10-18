@@ -4,6 +4,7 @@ export const serviceFilterableFields = [
   'minPrice',
   'maxPrice',
   'isAvailable',
+  'level',
 ];
 
 export const serviceSearchableFields = [

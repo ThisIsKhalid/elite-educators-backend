@@ -59,6 +59,7 @@ const getAllService = async (
     searchTerm,
     rating: ratingData,
     isAvailable,
+    level,
     ...filtersData
   } = filters;
 
@@ -79,6 +80,12 @@ const getAllService = async (
   //     },
   //   });
   // }
+
+  if (level) {
+    andConditions.push({
+      level: level,
+    });
+  }
 
   if (ratingData) {
     const minRating = parseFloat(ratingData.toString());

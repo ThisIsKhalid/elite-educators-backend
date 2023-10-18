@@ -32,4 +32,5 @@ export type IServiceFilters = {
   minPrice?: number;
   maxPrice?: number;
   isAvailable?: boolean;
+  level?: 'junior' | 'secondary' | 'higher-secondary';
 };
