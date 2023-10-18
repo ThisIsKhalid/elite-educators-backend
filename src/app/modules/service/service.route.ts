@@ -10,7 +10,7 @@ const router = express.Router();
 router.post(
   '/add-service',
   validateRequest(ServiceValidations.addServiceSchema),
-  auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
+  // auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
   ServiceControllers.createService
 );
 
