@@ -1,5 +1,5 @@
+import { IBooking } from './booking.interface';
 import { Booking } from './booking.model';
-import { IBooking } from './bookings.interface';
 
 const addBooking = async (data: IBooking): Promise<IBooking> => {
   const result = await Booking.create(data);
@@ -23,7 +23,10 @@ const getAllBookingByUserId = async (id: string): Promise<IBooking[]> => {
   return result;
 };
 
-const updateBooking = async (id: string, data: IBooking): Promise<IBooking | null> => {
+const updateBooking = async (
+  id: string,
+  data: IBooking
+): Promise<IBooking | null> => {
   const result = await Booking.findByIdAndUpdate(id, data, { new: true });
 
   return result;
