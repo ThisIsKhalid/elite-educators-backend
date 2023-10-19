@@ -11,7 +11,7 @@ router.post(
   BookingController.addBooking
 );
 
-router.get('/service/:serviceId', BookingController.getallBookingByServiceId);
+router.get('/', BookingController.getallBookings);
 
 router.get('/user/:userId', BookingController.getAllBookingByUserId);
 

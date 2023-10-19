@@ -9,21 +9,20 @@ const addBooking = async (data: IBooking): Promise<IBooking> => {
   return result;
 };
 
-const getallBookingByServiceId = async (
-  id: string,
+const getallBookings = async (
   paginationOptions: IPaginationOptions
 ) => {
   const { limit, page, skip } =
     paginationHelpers.calculatePagination(paginationOptions);
 
-  const result = await Booking.find({ serviceId: id })
+  const result = await Booking.find()
     .populate('userId')
     .populate('serviceId')
     .skip(skip)
     .limit(limit)
     .lean();
 
-  const total = await Booking.countDocuments({ serviceId: id });
+  const total = await Booking.countDocuments();
 
   return {
     meta: {
@@ -92,7 +91,7 @@ const bookingAccepts = async (id: string): Promise<IBooking | null> => {
 
 export const BookingService = {
   addBooking,
-  getallBookingByServiceId,
+  getallBookings,
   getAllBookingByUserId,
   updateBooking,
   deleteBooking,
