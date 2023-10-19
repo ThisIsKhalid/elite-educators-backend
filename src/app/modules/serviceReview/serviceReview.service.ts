@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import httpStatus from 'http-status';
-import mongoose from 'mongoose';
+import mongoose, { SortOrder } from 'mongoose';
 import ApiError from '../../../errors/ApiError';
 import { paginationHelpers } from '../../../helpers/paginationHelper';
 import { IPaginationOptions } from '../../../interfaces/pagination';
@@ -81,7 +81,7 @@ const getAllCourseReviews = async (
     .skip(skip)
     .limit(limit);
 
-  const total = await CourseReview.countDocuments();
+  const total = await CourseReview.countDocuments({ courseId });
 
   return {
     meta: {
@@ -140,6 +140,39 @@ const deleteCourseReview = async (
   return result;
 };
 
+
+const getAllReviews = async (
+  paginationOptions: IPaginationOptions,
+) => {
+  const { limit, page, skip, sortBy, sortOrder } =
+    paginationHelpers.calculatePagination(paginationOptions);
+
+    const sortConditions: { [key: string]: SortOrder } = {};
+    if (sortBy && sortOrder) {
+      if (sortOrder === 'asc' || sortOrder === 'desc') {
+        sortConditions[sortBy] = sortOrder as SortOrder;
+      }
+    }
+
+  const result = await CourseReview.find()
+    .populate('studentId')
+    .populate('courseId')
+    .sort(sortConditions)
+    .skip(skip)
+    .limit(limit);
+
+  const total = await CourseReview.countDocuments();
+
+  return {
+    meta: {
+      page,
+      limit,
+      total,
+    },
+    data: result,
+  };
+};
+
 export const CourseReviewService = {
   addCourseReview,
   getSingleCourseReview,
@@ -147,4 +180,5 @@ export const CourseReviewService = {
   getReviewsByStudentId,
   updateCourseReview,
   deleteCourseReview,
+  getAllReviews,
 };

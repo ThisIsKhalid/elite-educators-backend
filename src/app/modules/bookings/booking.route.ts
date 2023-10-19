@@ -1,4 +1,6 @@
 import express from 'express';
+import { ENUM_USER_ROLE } from '../../../enums/user';
+import auth from '../../middlewares/auth';
 import validateRequest from '../../middlewares/validateRequest';
 import { BookingController } from './booking.controller';
 import { BookingValidation } from './booking.validation';
@@ -7,16 +9,33 @@ const router = express.Router();
 
 router.post(
   '/add',
+  auth(ENUM_USER_ROLE.USER, ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
   validateRequest(BookingValidation.addBookingZodSchema),
   BookingController.addBooking
 );
 
-router.get('/', BookingController.getallBookings);
+router.get(
+  '/',
+  auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
+  BookingController.getallBookings
+);
 
-router.get('/user/:userId', BookingController.getAllBookingByUserId);
+router.get(
+  '/user/:userId',
+  auth(ENUM_USER_ROLE.USER, ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
+  BookingController.getAllBookingByUserId
+);
 
-router.delete('/:id', BookingController.deleteBooking);
+router.delete(
+  '/:id',
+  auth(ENUM_USER_ROLE.USER, ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
+  BookingController.deleteBooking
+);
 
-router.patch('/status/:id', BookingController.bookingAccepts);
+router.patch(
+  '/status/:id',
+  auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
+  BookingController.bookingAccepts
+);
 
 export const BookingRoutes = router;

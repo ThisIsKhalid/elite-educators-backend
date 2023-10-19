@@ -8,7 +8,7 @@ import { UserValidations } from './user.validation';
 const router = express.Router();
 
 router.patch(
-  '/update-user',
+  '/:id',
   validateRequest(UserValidations.updateUser),
   auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.USER),
   UserControllers.updateUser

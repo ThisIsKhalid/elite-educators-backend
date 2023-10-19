@@ -5,14 +5,13 @@ import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 import { IUserProfile } from './user.interface';
 import { UserServices } from './user.service';
+import pick from '../../../shared/pick';
+import { paginationFields } from '../../../constants/pagination';
 
 const updateUser: RequestHandler = catchAsync(
   async (req: Request, res: Response) => {
     const userData = req.body;
-    
-
-    const user = req.user;
-    const { id } = user!;
+    const id = req.params.id;
 
     const result = await UserServices.updateUser(id, userData);
 
@@ -58,13 +57,16 @@ const getUserProfile: RequestHandler = catchAsync(
 
 const getAllUser: RequestHandler = catchAsync(
   async (req: Request, res: Response) => {
-    const result = await UserServices.getAllUser();
+    const paginationOptions = pick(req.query, paginationFields);
+
+    const result = await UserServices.getAllUser(paginationOptions);
 
     sendResponse<IUserProfile[]>(res, {
       statusCode: httpStatus.OK,
       success: true,
       message: 'Users fetched successfully!',
-      data: result,
+      meta: result.meta,
+      data: result.data,
     });
   }
 );
@@ -73,6 +75,7 @@ const getAllUser: RequestHandler = catchAsync(
 const changeRole: RequestHandler = catchAsync(
   async (req: Request, res: Response) => {
     const id = req.params.id;
+    // console.log(id);
 
     const result = await UserServices.changeRole(id);
 
