@@ -11,7 +11,7 @@ const app: Application = express();
 // app.use(cors());
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: 'https://elite-educators-frontend.vercel.app',
     credentials: true,
   })
 );
@@ -25,7 +25,6 @@ app.get('/', (req, res) => {
   res.send('Welcome to Elite Educator Server Side');
 });
 app.use('/api/v1', routes);
-
 
 //global error handler
 app.use(globalErrorHandler);
