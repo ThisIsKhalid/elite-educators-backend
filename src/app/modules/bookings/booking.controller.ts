@@ -19,25 +19,19 @@ const addBooking = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-const getallBookingByServiceId = catchAsync(
-  async (req: Request, res: Response) => {
-    const serviceId = req.params.serviceId;
-    const paginationOptions = pick(req.query, paginationFields);
+const getallBookings = catchAsync(async (req: Request, res: Response) => {
+  const paginationOptions = pick(req.query, paginationFields);
 
-    const result = await BookingService.getallBookingByServiceId(
-      serviceId,
-      paginationOptions
-    );
+  const result = await BookingService.getallBookings(paginationOptions);
 
-    sendResponse<IBooking[]>(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: 'Booking by service id retrieved successfully !',
-      meta: result.meta,
-      data: result.data,
-    });
-  }
-);
+  sendResponse<IBooking[]>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Bookings retrieved successfully !',
+    meta: result.meta,
+    data: result.data,
+  });
+});
 
 const getAllBookingByUserId = catchAsync(
   async (req: Request, res: Response) => {
@@ -87,7 +81,7 @@ const bookingAccepts = catchAsync(async (req: Request, res: Response) => {
 
 export const BookingController = {
   addBooking,
-  getallBookingByServiceId,
+  getallBookings,
   getAllBookingByUserId,
   deleteBooking,
   bookingAccepts,
