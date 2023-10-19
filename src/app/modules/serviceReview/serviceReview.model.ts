@@ -10,7 +10,7 @@ const courseReviewSchema = new Schema<ICourseReview, CourseReviewModel>(
     },
     courseId: {
       type: Schema.Types.ObjectId,
-      ref: 'Course',
+      ref: 'Service',
       required: true,
     },
     description: {

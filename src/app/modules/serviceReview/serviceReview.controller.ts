@@ -101,6 +101,21 @@ const deleteCourseReview = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+
+const getAllReviews = catchAsync(async (req: Request, res: Response) => {
+  const paginationOptions = pick(req.query, paginationFields);
+
+  const result = await CourseReviewService.getAllReviews(paginationOptions);
+
+  sendResponse<ICourseReview[]>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Reviews retrieved successfully !',
+    meta: result.meta,
+    data: result.data,
+  });
+})
+
 export const CourseReviewController = {
   addCourseReview,
   getSingleCourseReview,
@@ -108,4 +123,5 @@ export const CourseReviewController = {
   getReviewsByStudentId,
   updateCourseReview,
   deleteCourseReview,
+  getAllReviews
 };
