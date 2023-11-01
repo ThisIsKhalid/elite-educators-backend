@@ -45,9 +45,6 @@ const deleteUser = (id, user) => __awaiter(void 0, void 0, void 0, function* () 
     if (user.role === 'user' && user.id !== id) {
         throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, 'You cannot delete this user');
     }
-    if (user.role === 'super_admin' && user.id === id) {
-        throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, 'You cannot delete this user');
-    }
     const result = yield user_model_1.User.findByIdAndDelete(id);
     return result;
 });

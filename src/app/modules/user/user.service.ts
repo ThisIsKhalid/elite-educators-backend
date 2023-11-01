@@ -35,10 +35,6 @@ const deleteUser = async (
     throw new ApiError(httpStatus.BAD_REQUEST, 'You cannot delete this user');
   }
 
-  if(user.role === 'super_admin' && user.id === id) {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'You cannot delete this user');
-  }
-
   const result = await User.findByIdAndDelete(id);
 
   return result;
