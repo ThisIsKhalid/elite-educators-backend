@@ -18,6 +18,9 @@ const addBookingZodSchema = z.object({
       daysPerWeek: z.number({
         required_error: 'Days per week is required',
       }),
+      _id: z.string({
+        required_error: 'Batch ID is required',
+      }),
     }),
     startDate: z.string({
       required_error: 'Start date is required',

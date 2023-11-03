@@ -68,6 +68,13 @@ const bookingAccepts = (id) => __awaiter(void 0, void 0, void 0, function* () {
     }, { new: true });
     return result;
 });
+const getBookingsbyId = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield booking_model_1.Booking.findById(id)
+        .populate('userId')
+        .populate('serviceId')
+        .lean();
+    return result;
+});
 exports.BookingService = {
     addBooking,
     getallBookings,
@@ -75,4 +82,5 @@ exports.BookingService = {
     updateBooking,
     deleteBooking,
     bookingAccepts,
+    getBookingsbyId,
 };

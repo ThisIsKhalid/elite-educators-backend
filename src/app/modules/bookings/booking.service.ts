@@ -89,6 +89,15 @@ const bookingAccepts = async (id: string): Promise<IBooking | null> => {
   return result;
 };
 
+const getBookingsbyId = async (id: string): Promise<IBooking | null> => {
+  const result = await Booking.findById(id)
+    .populate('userId')
+    .populate('serviceId')
+    .lean();
+
+  return result;
+};
+
 export const BookingService = {
   addBooking,
   getallBookings,
@@ -96,4 +105,5 @@ export const BookingService = {
   updateBooking,
   deleteBooking,
   bookingAccepts,
+  getBookingsbyId,
 };

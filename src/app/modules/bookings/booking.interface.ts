@@ -5,6 +5,7 @@ import { IService } from "../service/service.interface";
  type IBatch = {
   amountPerWeek: number;
   daysPerWeek: number;
+  _id: Types.ObjectId;
 };
  
  export type IBooking = {

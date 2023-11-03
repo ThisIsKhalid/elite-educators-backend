@@ -8,15 +8,20 @@ import cookieParser from 'cookie-parser';
 
 const app: Application = express();
 
-// app.use(
-//   cors({
-//     origin: 'http://localhost:3000',
-//     credentials: true,
-//   })
-// );
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://elite-educators-frontend.vercel.app',
+];
+
 app.use(
   cors({
-    origin: 'https://elite-educators-frontend.vercel.app',
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true,
   })
 );

@@ -26,6 +26,10 @@ const bookingSchema = new mongoose_1.Schema({
             type: Number,
             required: true,
         },
+        _id: {
+            type: mongoose_1.Schema.Types.ObjectId,
+            required: true,
+        }
     },
     startDate: {
         type: String,

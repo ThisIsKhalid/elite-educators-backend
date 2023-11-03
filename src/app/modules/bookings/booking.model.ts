@@ -26,6 +26,10 @@ const bookingSchema = new Schema<IBooking>(
         type: Number,
         required: true,
       },
+      _id: {
+        type: Schema.Types.ObjectId,
+        required: true,
+      }
     },
     startDate: {
       type: String,
