@@ -10,19 +10,8 @@ const globalErrorHandler_1 = __importDefault(require("./app/middlewares/globalEr
 const routes_1 = __importDefault(require("./app/routes"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const app = (0, express_1.default)();
-const allowedOrigins = [
-    'http://localhost:3000',
-    'https://elite-educators-frontend.vercel.app',
-];
 app.use((0, cors_1.default)({
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-            callback(null, true);
-        }
-        else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
+    origin: true,
     credentials: true,
 }));
 app.use((0, cookie_parser_1.default)());
