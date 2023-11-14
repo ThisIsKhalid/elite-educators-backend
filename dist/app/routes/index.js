@@ -10,6 +10,7 @@ const user_route_1 = require("../modules/user/user.route");
 const booking_route_1 = require("../modules/bookings/booking.route");
 const serviceReview_route_1 = require("../modules/serviceReview/serviceReview.route");
 const order_route_1 = require("../modules/paymentOrder/order.route");
+const tutor_route_1 = require("../modules/tutors/tutor.route");
 const router = express_1.default.Router();
 const moduleRoutes = [
     // ... routes
@@ -36,6 +37,10 @@ const moduleRoutes = [
     {
         path: '/orders',
         routes: order_route_1.OrderRoutes,
+    },
+    {
+        path: '/tutors',
+        routes: tutor_route_1.TutorRoute,
     },
 ];
 moduleRoutes.forEach(route => router.use(route.path, route.routes));

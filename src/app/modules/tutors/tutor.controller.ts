@@ -17,6 +17,23 @@ const createTutor: RequestHandler = catchAsync(
   }
 );
 
+const tutorStatusChange: RequestHandler = catchAsync(
+  async (req: Request, res: Response) => {
+    const result = await TutorService.tutorStatusChange(
+      req.params.id,
+      req.body.status
+    );
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'User updated successfully!',
+      data: result,
+    });
+  }
+);
+
 export const TutorController = {
   createTutor,
+  tutorStatusChange,
 };
