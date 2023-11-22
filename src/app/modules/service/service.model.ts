@@ -38,7 +38,7 @@ const serviceSchema = new Schema<IService>(
     },
     rating: {
       type: Number,
-      default: 0,
+      default: 3,
     },
     location: {
       type: String,
