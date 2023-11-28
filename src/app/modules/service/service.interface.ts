@@ -19,6 +19,7 @@ export type IService = {
   enrolled: number;
   isAvailable: boolean;
   classtime: string;
+  isPopular?: boolean;
 };
 
 export type IBooking = {

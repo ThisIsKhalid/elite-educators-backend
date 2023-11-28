@@ -60,6 +60,10 @@ const serviceSchema = new Schema<IService>(
       type: String,
       required: true,
     },
+    isPopular: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
