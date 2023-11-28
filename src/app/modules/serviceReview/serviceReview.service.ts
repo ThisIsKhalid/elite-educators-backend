@@ -79,7 +79,8 @@ const getAllCourseReviews = async (
   const result = await CourseReview.find({ courseId })
     .populate('studentId')
     .skip(skip)
-    .limit(limit);
+    .limit(limit)
+    .sort({ createdAt: -1 });
 
   const total = await CourseReview.countDocuments({ courseId });
 

@@ -37,7 +37,7 @@ const serviceSchema = new mongoose_1.Schema({
     },
     rating: {
         type: Number,
-        default: 3,
+        default: 0,
     },
     location: {
         type: String,

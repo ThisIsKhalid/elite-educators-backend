@@ -66,7 +66,8 @@ const getAllCourseReviews = (paginationOptions, courseId) => __awaiter(void 0, v
     const result = yield serviceReview_model_1.CourseReview.find({ courseId })
         .populate('studentId')
         .skip(skip)
-        .limit(limit);
+        .limit(limit)
+        .sort({ createdAt: -1 });
     const total = yield serviceReview_model_1.CourseReview.countDocuments({ courseId });
     return {
         meta: {
