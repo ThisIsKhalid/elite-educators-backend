@@ -59,6 +59,10 @@ const serviceSchema = new mongoose_1.Schema({
         type: String,
         required: true,
     },
+    isPopular: {
+        type: Boolean,
+        default: false,
+    },
 }, {
     timestamps: true,
     toJSON: {
