@@ -8,11 +8,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TutorService = void 0;
+const http_status_1 = __importDefault(require("http-status"));
+const ApiError_1 = __importDefault(require("../../../errors/ApiError"));
 const tutors_model_1 = require("./tutors.model");
 const createTutor = (data) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield tutors_model_1.Tutor.create(data);
+    const { userId } = data;
+    const isTutorIxist = yield tutors_model_1.Tutor.findById(userId);
+    if (isTutorIxist) {
+        throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, 'You already have a tutor profile');
+    }
+    const result = (yield tutors_model_1.Tutor.create(data)).populate('userId');
     return result;
 });
 const tutorStatusChange = (id, status) => __awaiter(void 0, void 0, void 0, function* () {
