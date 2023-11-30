@@ -30,7 +30,13 @@ const tutorStatusChange = async (
   return result;
 };
 
+const getAllTutors = async () => {
+  const result = await Tutor.find().populate('userId');
+  return result;
+};
+
 export const TutorService = {
   createTutor,
   tutorStatusChange,
+  getAllTutors,
 };
