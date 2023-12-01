@@ -80,20 +80,18 @@ To get started with the Elite Educators Backend, follow these steps:
    Create a `.env` file and set up the required environment variables.
 
    ```env
-NODE_ENV=development
-PORT=5000
-DATABASE_URL=
+   NODE_ENV=development
+   PORT=5000
+   DATABASE_URL=
+   BCRYPT_SALT_ROUNDS=12
+   JWT_SECRET=
+   JWT_EXPIRES_IN=
+   JWT_REFRESH_SECRET=
+   JWT_REFRESH_EXPIRES_IN=
 
-BCRYPT_SALT_ROUNDS=12
-
-JWT_SECRET=
-JWT_EXPIRES_IN=
-JWT_REFRESH_SECRET=
-JWT_REFRESH_EXPIRES_IN=
-
-STORE_ID=
-STORE_PASSWORD=
-IS_LIVE=
+   STORE_ID=
+   STORE_PASSWORD=
+   IS_LIVE=
    ```
 
 4. **Run the Application:**
