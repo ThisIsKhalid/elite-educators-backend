@@ -2,8 +2,8 @@
 
 Welcome to the backend repository of the Elite Educators Platform. This backend system is designed to support the seamless functioning of the Elite Educators online education hub.
 
-live site: https://elite-educators-frontend.vercel.app
-client site: https://github.com/ThisIsKhalid/elite-educators-frontend
+- live site: https://elite-educators-frontend.vercel.app
+- client site: https://github.com/ThisIsKhalid/elite-educators-frontend
 
 ## Features
 
