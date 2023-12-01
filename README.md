@@ -73,7 +73,7 @@ To get started with the Elite Educators Backend, follow these steps:
 2. **Install Dependencies:**
    ```bash
    cd elite-educators-backend
-   npm install
+   yarn install
    ```
 
 3. **Set Up Environment Variables:**
@@ -96,19 +96,8 @@ To get started with the Elite Educators Backend, follow these steps:
 
 4. **Run the Application:**
    ```bash
-   npm start
+   yarn dev
    ```
 
-   The backend will be running at `http://localhost:3000` by default.
+   The backend will be running at `http://localhost:5000` by default.
 
-## Contributing
-
-If you'd like to contribute to the development of the Elite Educators Backend, please follow our [contribution guidelines](CONTRIBUTING.md).
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-```
-
-Feel free to customize the content based on your specific project details and requirements. If there are additional sections or information you'd like to include, you can modify the template accordingly.
